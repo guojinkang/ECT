@@ -209,7 +209,7 @@
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
-    height: 140px;
+    height: 100px;
     -webkit-flex: 1 1 780px;
     -ms-flex: 1 1 780px;
     flex: 1 1 780px;
@@ -254,7 +254,7 @@
     border-color: #ff6565;
     color: #fff;
     width: 130px;
-    height: 140px;
+    height: 100px;
     margin-left: 20px;
     font-weight: normal;
 }
