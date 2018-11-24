@@ -1,6 +1,9 @@
 package com.ECT.entity;
 
 import javax.persistence.Column;
+package com.ECT.entity;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,10 +19,15 @@ public class Publish {
 	private String userName;
 	private String title;
 	private int typeid;
+	private String typewant;
 	private String context;
 	private String pricture;
+	private String pricture2;
+	private String pricture3;
+	private String pricture4;
 	private float price;
 	private String time;
+	private String state;
 	@Id
 	@Column(name="publish_id")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -78,5 +86,42 @@ public class Publish {
 	public void setTime(String time) {
 		this.time = time;
 	}
+	@Column(name="publish_picture2")
+	public String getPricture2() {
+		return pricture2;
+	}
+	public void setPricture2(String pricture2) {
+		this.pricture2 = pricture2;
+	}
+	@Column(name="publish_picture3")
+	public String getPricture3() {
+		return pricture3;
+	}
+	public void setPricture3(String pricture3) {
+		this.pricture3 = pricture3;
+	}
+	@Column(name="publish_picture4")
+	public String getPricture4() {
+		return pricture4;
+	}
+	public void setPricture4(String pricture4) {
+		this.pricture4 = pricture4;
+	}
+	@Column(name="type_want")
+	public String getTypewant() {
+		return typewant;
+	}
+	public void setTypewant(String typewant) {
+		this.typewant = typewant;
+	}
+	@Column(name="state")
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
 	
 }
+
+
