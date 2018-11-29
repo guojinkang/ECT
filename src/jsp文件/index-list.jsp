@@ -41,18 +41,13 @@
 function Search()
 	{
 		var search=document.getElementById("search").value;
-		var type=document.getElementById("type").value;
-		window.location.href="/ECTPrj/indexlist?pageNum=1&search="+search+"&type="+type;
+		window.location.href="/ECTPrj/SearchServlet?search="+search;
 	}
-function sw()
-	{
-		var sw=document.getElementById("switch").value;
-		if(sw==""){
-			
-		}
-		else{
-			window.location.href="/ECTPrj/indexlist?pageNum="+sw+"&search=${search}&type=${type}";
-		}
+</script>
+<script type="text/javascript">
+function f(){
+		var select=document.getElementById("type").value;
+		window.location.href="/ECTPrj/SearchSelect?select="+select;
 	}
 </script>
 <body>
@@ -77,6 +72,9 @@ function sw()
 									<i class="ydc-icon ydc-icon-file fl"></i>分类
 								</span>
 								<ul>
+								<li>
+										<a href="indexlist">查看全部</a>
+									</li>
 									<li>
 										<a href="Searchtype?searchtype=1">跑腿代购</a>
 									</li>
@@ -95,6 +93,9 @@ function sw()
 									<li>
 										<a href="Searchtype?searchtype=6">打工兼职</a>
 									</li>
+									<li>
+										<a href="Searchtype?searchtype=7">物品买卖</a>
+									</li>
 								</ul>
 							</li>
 							<li class="ydc-menu-item">
@@ -103,7 +104,7 @@ function sw()
 								</span>
 								<ul>
 									<li>
-										<a href="info">账号信息</a>
+										<a href="info.jsp">账号信息</a>
 									</li>
 								</ul>
 							</li>
@@ -113,7 +114,7 @@ function sw()
 								</span>
 								<ul>
 									<li>
-										<a href="customer.html">在线咨询</a>
+										<a href="customer.jsp">在线咨询</a>
 									</li>
 								</ul>
 							</li>
@@ -164,10 +165,10 @@ function sw()
 									<div class="clearfix">
 										<div class="fl ydc-group-sel">
 					
-											<select name="type"   id="type" >
-												<option value="" >全部类型</option>
-												<option value="求人" ${select.one}>求人</option>
-												<option value="帮人" ${select.two}>帮人</option>
+											<select name="type" onchange="f()"  id="type">
+												<option>全部类型</option>
+												<option value=1>求人</option>
+												<option value=2>帮人</option>
 											</select>
 										</div>
 										<div class="fl ydc-group-sel">
@@ -179,11 +180,11 @@ function sw()
 											</select>
 										</div>
 										<div class="fl ydc-group-input">
-											<input id="search" type="text" placeholder="请输入关键词进行搜索" value="${search}">
+											<input id="search" type="text" placeholder="请输入关键词进行搜索">
 											<button class="ydc-group-button" onclick="Search()">搜 索</button>
 										</div>
 									</div>
-									<div class="ydc-group-altogether">共<span>${count}</span>条内容</div>
+									<div class="ydc-group-altogether">共<span>9</span>条内容</div>
 
 									<c:forEach var="p" items="${publishall}">
 									
@@ -193,7 +194,7 @@ function sw()
 
 										<div class="ydc-group-table-item">
 											<div class="ydc-group-table-item-img">
-												<img src="${p.pricture}"  alt="">
+												<img width="133" height="95" src="bt/${p.pricture }"  alt="">
 											</div>
 											<div class="ydc-actions">
 												<div>
@@ -224,33 +225,27 @@ function sw()
 								<div class="ydc-pagination">
 									<ol>
 										<li class="ydc-previous-item">
-											<a href="indexlist?pageNum=${page.prePageNum}&search=${search}&type=${type}"><button class="ydc-previous-item-btn-medium">
+											<button class="ydc-previous-item-btn-medium ydc-disabled">
 												<span>上一页</span>
 											</button>
-											</a>
 										</li>
-										<c:forEach items="${totlecount}" var="i">
 										<li>
-											<c:choose>
-											<c:when test="${i==page.currentPageNum}">
-											<a href="indexlist?pageNum=${i}&search=${search}&type=${type}"><button class="ydc-previous-item-btn-medium cur">${i}</button></a>
-											</c:when>
-											<c:otherwise>
-											<a href="indexlist?pageNum=${i}&search=${search}&type=${type}"><button class="ydc-previous-item-btn-medium">${i}</button></a>
-											</c:otherwise>
-											</c:choose>
+											<button class="ydc-previous-item-btn-medium cur">1</button>
 										</li>
-										</c:forEach>
+										<li>
+											<button class="ydc-previous-item-btn-medium">2</button>
+										</li>
+										<li>
+											<button class="ydc-previous-item-btn-medium">3</button>
+										</li>
 										<li class="ydc-previous-item">
-											<a href="indexlist?pageNum=${page.nextPageNum}&search=${search}&type=${type}"><button class="ydc-previous-item-btn-medium">
+											<button class="ydc-previous-item-btn-medium">
 												<span>下一页</span>
 											</button>
-											</a>
 										</li>
 										<li class="ydc-item-quick">
-											第<div class="ydc-item-quick-kun"><input type="text" aria-invalid="false" class="" 
-											style="height: 20px;" id="switch"></div>页
-											<button style="margin-left:5px;" class="ydc-previous-item-btn-medium" onclick="sw()">
+											第<div class="ydc-item-quick-kun"><input type="number" aria-invalid="false" class=""></div>页
+											<button style="margin-left:5px;" class="ydc-previous-item-btn-medium">
 												<span>跳转</span>
 											</button>
 										</li>
