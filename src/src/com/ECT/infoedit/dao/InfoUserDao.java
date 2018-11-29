@@ -11,7 +11,7 @@ import com.ECT.entity.User;
 public class InfoUserDao {
 	@Autowired
 	 private SessionFactory sessionFactory;
-	 	//获取和当前线程绑定的Session
+	 	
 	 private Session getSession(){
 		 return sessionFactory.getCurrentSession();
 	 }

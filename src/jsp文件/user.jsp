@@ -24,58 +24,24 @@
 		<link type="text/css" rel="stylesheet" href="admin/css/core.css">
 		<link type="text/css" rel="stylesheet" href="admin/css/icon.css">
 		<link type="text/css" rel="stylesheet" href="admin/css/home.css">
-		
+		<style>
+			.b{padding:0px;border:1px solid:#ccc;border-radius:25px;}
+		</style>
 	</head>
 
 	<body>
-		<nav class="colorlib-nav" role="navigation">
-			<!--<div class="top-menu" style="background:#f5fff5;">
-				<div class="container">
-					<div class="row">
-						<div class="col-xs-2">
-							<div id="colorlib-logo"><img src="images/logo.jpg">&nbsp;<a href="index.jsp">海星</a></div>
-						</div>
-						<div class="col-xs-10 text-right menu-1">
-							<ul>
-								<li class="active"><a href="index.jsp" target="_top">首页</a></li>
-
-								<li class="has-dropdown">
-									<a href="indexlist" target="_top">问题列表</a>
-								</li>
-
-								<li class="has-dropdown">
-									<a href="blog.jsp" target="_top">客服服务</a>
-								</li>
-								<li class="active">
-									<c:choose>
-										<c:when test="${empty username }">
-												<a href='login.jsp' target="_top">请登陆</a>
-										</c:when>
-										<c:otherwise>
-											<img class='b' src="${username.icon}" width='30'  height='30'>&nbsp; ${username.userName} &nbsp;<a href='loginout' target="_top">退出登录</a>
-										</c:otherwise>
-									</c:choose>
-							
-								</li>
-
-
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div> -->
-		</nav>
+		<%@include file="head.jsp" %>
 
 		<div class="header">
 			<div class="user-info">
 				<div class="w1200">
 					<div class="user-headface">
-						<img src="statics/images/user_face.jpg"/>
+						<img src="${user.icon }"/>
 					</div>
 					<div class="user-account">
-						<p class="tip">Hi!下午好!</p>
+						<p class="tip">Hi!</p>
 						<p class="account">
-							<span>帐户名：汪世昭</span>
+							<span>欢迎来到我的主页！</span>
 						</p>
 					</div>
 				</div>
@@ -92,13 +58,13 @@
 						</a>
 					</li>
 					<li>
-						<a href="user-fb.jsp">
+						<a href="userpublishs?publishname=${user.userName }">
 							<i class="icon iconfont icon-jilu"></i>
 							发布记录
 						</a>
 					</li>
 					<li>
-						<a href="#">
+						<a href="user-wc.jsp">
 							<i class="icon iconfont icon-icon--"></i>
 							完成记录
 						</a>
@@ -125,37 +91,31 @@
 									<div class="ydc-reg-form-group clearfix">
 										<label>帐号名称</label>
 										<div class="ydc-reg-form-input">
-											<label>汪世昭</label>
+											<label>${user.userName }</label>
 										</div>
 									</div>
 									<div class="ydc-reg-form-group clearfix">
 										<label>帐号简介</label>
 										<div class="ydc-reg-form-input">
-											<label>一点车，让您多懂一点车。</label>
-										</div>
-									</div>
-									<div class="ydc-reg-form-group clearfix">
-										<label>帐号详情</label>
-										<div class="ydc-reg-form-input">
-											<label></label>
+											<label>${user.introduction }</label>
 										</div>
 									</div>
 									<div class="ydc-reg-form-group clearfix">
 										<label>姓名</label>
 										<div class="ydc-reg-form-input">
-											<label>李嘉桦</label>
+											<label>${user.name }</label>
 										</div>
 									</div>
 									<div class="ydc-reg-form-group clearfix">
 										<label>所在学院</label>
 										<div class="ydc-reg-form-input">
-											<label>软件学院</label>
+											<label>${user.major }</label>
 										</div>
 									</div>
 									<div class="ydc-reg-form-group clearfix">
 										<label>邮箱</label>
 										<div class="ydc-reg-form-input">
-											<label>aui_cn@163.com</label>
+											<label>${user.email }</label>
 										</div>
 									</div>
 								</div>
@@ -165,7 +125,7 @@
 				
 						<div class="no-doc">
 						<img src="statics/images/no_doc.jpg"/>
-						<p>没有更多资料了哦~</p>
+						<p>暂时没有更多资料了哦~</p>
 					</div>
 						
 					</div>

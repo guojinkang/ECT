@@ -19,7 +19,9 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.ECT.entity.Page;
 import com.ECT.entity.Publish;
 import com.ECT.entity.User;
 import com.ECT.list.service.ListService;
@@ -36,79 +38,14 @@ public class PublishController {
 	@RequestMapping(value = "/onepublish")
 	public String getpublish(HttpServletRequest request, HttpSession session) {
 
-		String id = request.getParameter("publishname");
-		session.setAttribute("publish", publishServiceImpl.findOnepublish(id));
+		String id = request.getParameter("publishid");
+		Publish publish=publishServiceImpl.findOnepublish(id);
+		session.setAttribute("publish", publish);
 		session.setAttribute("user",
-				publishServiceImpl.findOneuser(publishServiceImpl.findOnepublish(id).getUserName()));
+				publishServiceImpl.findOneuser(publish.getUserName()));
 		return "frameset";
 	}
 
-	@RequestMapping(value = "/uploadfile")
-	public String uploadfile(@RequestParam(value="files1",required=false) MultipartFile file,HttpServletRequest request) {
-		System.out.println(file);
-		System.out.println(file.getContentType());
-		return "release";
-	}
-//	@RequestMapping(value = "/uploadfile")
-//	public String uplaodfile(HttpServletRequest request)
-//	{
-//		MultipartResolver resolver = new CommonsMultipartResolver(request.getSession().getServletContext());
-//        MultipartHttpServletRequest multipartRequest = resolver.resolveMultipart(request);
-//
-//		MultipartFile file = multipartRequest.getFile("fileToUpload");
-//		System.out.println(file);
-//		return "jj";
-//		System.out.println(file.getOriginalFilename());
-//		System.out.println(file.getName());
-//		
-//	}
-//	@RequestMapping(value = "/uploadfile")
-//	public String uplaodfile(@RequestParam("file") CommonsMultipartFile file, HttpServletRequest request, HttpServletResponse response)
-//	{
-//		 
-//		 System.out.println(file.getName());
-//		 System.out.println(file.getContentType());
-//		 return "jj";
-//		
-//		
-//	}
-//	public void uploadfile(HttpServletRequest request,HttpServletResponse response)
-//	{
-//		 //获取服务器中保存文件的路径
-//		  String path = "E:\\\\";
-//		 
-//		   //获取解析器  
-//		     CommonsMultipartResolver resolver = new CommonsMultipartResolver(request.getSession().getServletContext());  
-//		     
-//		     //判断是否是文件  
-//		     if(resolver.isMultipart(request)){  
-//		         //进行转换  
-//		         MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest)(request);  
-//		         //获取所有文件名称  
-//		         Iterator<String> it = multiRequest.getFileNames();
-//		         System.out.println(multiRequest.getFileMap().keySet().size());
-//		         System.out.println(it.hasNext());
-//		         while(it.hasNext()){  
-//		             //根据文件名称取文件  
-//		             MultipartFile file = multiRequest.getFile(it.next());
-//		            
-//		             String fileName = file.getOriginalFilename();  
-//		             String localPath = path + fileName;  
-//		             //创建一个新的文件对象，创建时需要一个参数，参数是文件所需要保存的位置
-//		             File newFile = new File(localPath);  
-//		             //上传的文件写入到指定的文件中  
-//		             try {
-//						file.transferTo(newFile);
-//					} catch (IllegalStateException e) {
-//						// TODO Auto-generated catch block
-//						e.printStackTrace();
-//					} catch (IOException e) {
-//						// TODO Auto-generated catch block
-//						e.printStackTrace();
-//					}  
-//		         } 
-//		     }
-//	}
 
 	@RequestMapping(value = "/publish", method = RequestMethod.POST)
 	public String publish(Publish publish, HttpSession session, HttpServletRequest request) {
@@ -124,7 +61,34 @@ public class PublishController {
 		publish.setTime(time);
 		this.listService.Publish(publish);
 		
-		return "index";
+		return "redirect:/onepublish?publishid="+publish.getPublishId();
+	}
+	//用户查询历史任务
+	@RequestMapping(value="/histroy_order")
+	public String pushorder(HttpServletRequest request,HttpSession session)
+	{
+		String username=((User)session.getAttribute("username")).getUserName();
+		int pagenum=Integer.parseInt(request.getParameter("pagenum"));
+		Page<Publish> page=new Page<Publish>();
+		page.setCurrentPageNum(pagenum);
+		page.setPagelength(5);
+		int count=publishServiceImpl.getnum(username);
+		page.setCount(count);
+		if(pagenum>page.getTotalPageNum())
+		{
+			pagenum=page.getTotalPageNum();
+			page.setCurrentPageNum(pagenum);
+		}
+		
+		if(pagenum==page.getTotalPageNum()&&(count/page.getTotalPageNum()!=0))
+		{
+			page.setPagelength(count%page.getTotalPageNum());
+		}
+		
+		page.setList(publishServiceImpl.history(username, pagenum));
+		request.setAttribute("page", page);
+		request.setAttribute("count", count);
+		return "Personal_information_fb";
 	}
 	
 	//根据用户查询历史任务
@@ -138,17 +102,7 @@ public class PublishController {
 			session.setAttribute("userpublish", this.publishServiceImpl.finduserpbs(page,rows,name));
 			return "user-fb";
 		}
-		//个人信息查询历史任务
-		@RequestMapping(value="/userpublishss", method = RequestMethod.GET)
-		public String getuserpbss(HttpServletRequest request,HttpSession session) {
-			String name=request.getParameter("publishnamee");
-			Integer page=1;
-			Integer rows=5;
-			session.setAttribute("page", page);
-			session.setAttribute("userpbname",name);
-			session.setAttribute("userpublish", this.publishServiceImpl.finduserpbs(page,rows,name));
-			return "Personal_information_fb";
-		}
+		
 		//分页显示用户历史任务
 		@RequestMapping(value="/userpublishsbypage", method = RequestMethod.GET)
 		public String getuserpbsbypage(HttpServletRequest request,HttpSession session) {
@@ -159,6 +113,14 @@ public class PublishController {
 			session.setAttribute("userpublish", this.publishServiceImpl.finduserpbs(page,rows,name));
 			return "user-fb";
 		}
+		//删除任务
+				@RequestMapping(value="/deletePb")
+				public String deletePb(Publish publish,HttpServletRequest request,HttpSession session) {
+				  
+					String id=request.getParameter("publishname");
+					this.publishServiceImpl.deletePb(id);
+					return "flush";
+				}
 		
 	@RequestMapping(value="/release")
 	public String tishi(HttpSession session) {
@@ -178,5 +140,7 @@ public class PublishController {
 			return"login";
 		}
 	}
+	
+	
 
 }

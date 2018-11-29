@@ -29,44 +29,8 @@
 		</style>
 	</head>
 
-	<body>
-		<nav class="colorlib-nav" role="navigation">
-			<div class="top-menu" style="background:#f5fff5;">
-				<div class="container">
-					<div class="row">
-						<div class="col-xs-2">
-							<div id="colorlib-logo"><img src="images/logo.jpg">&nbsp;<a href="index.jsp">海星</a></div>
-						</div>
-						<div class="col-xs-10 text-right menu-1">
-							<ul>
-								<li class="active"><a href="index.jsp" target="_top">首页</a></li>
-
-								<li class="has-dropdown">
-									<a href="indexlist" target="_top">问题列表</a>
-								</li>
-
-								<li class="has-dropdown">
-									<a href="index.jsp" target="_top">客服服务</a>
-								</li>
-								<li class="active">
-									<c:choose>
-										<c:when test="${empty username }">
-												<a href='login.jsp' target="_top">请登陆</a>
-										</c:when>
-										<c:otherwise>
-											<a href="Personal_information.jsp"><img class='b' src="${username.icon}" width='30'  height='30'></a>&nbsp; ${username.userName} &nbsp;<a href='loginout' target="_top">退出登录</a>
-										</c:otherwise>
-									</c:choose>
-							
-								</li>
-
-
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</nav>
+	<body >
+		<%@include file="head.jsp" %>
 
 		<div class="header">
 			<div class="user-info">
@@ -75,7 +39,7 @@
 						<img src="${username.icon }"/>
 					</div>
 					<div class="user-account">
-						<p class="tip">Hi!</p>
+						<p class="tip">Hi</p>
 						<p class="account">
 							<span>欢迎来到我的主页！</span>
 						</p>
@@ -94,15 +58,33 @@
 						</a>
 					</li>
 					<li>
-						<a href="userpublishss?publishnamee=${username.userName }">
+						<a href="histroy_order?username=${username.userName }&pagenum=1">
 							<i class="icon iconfont icon-jilu"></i>
-							发布记录
+							历史接单
 						</a>
 					</li>
 					<li>
-						<a href="Personal_information_wc.jsp">
+						<a href="histroy_order?username=${username.userName }&pagenum=1">
 							<i class="icon iconfont icon-icon--"></i>
-							完成记录
+							历史发布
+						</a>
+					</li>
+					<li>
+						<a href="histroy_order?username=${username.userName }&pagenum=1">
+							<i class="icon iconfont icon-jilu"></i>
+							正在发布
+						</a>
+					</li>
+					<li>
+						<a href="histroy_order?username=${username.userName }&pagenum=1">
+							<i class="icon iconfont icon-icon--"></i>
+							正在完成
+						</a>
+					</li>
+					<li>
+						<a href="Personal_password_change.jsp">
+							<i class="icon iconfont icon-icon--"></i>
+							修改密码
 						</a>
 					</li>
 				</ul>
@@ -148,13 +130,22 @@
 											<label>${username.email }</label>
 										</div>
 									</div>
+									
+									<div class="ydc-reg-form-group clearfix">
+										<label>海星币</label>
+										<div class="ydc-reg-form-input">
+											<label>${username.point }&nbsp&nbsp&nbsp<input type="button" value="充值" onclick="javascript:window.location.href='topay';"></label>
+										</div>
+									</div>
+									            
+                                                
 								</div>
 							</div>
 						</div>
 					</div>
 				
 						<div class="no-doc">
-						<p><a><button>修改个人信息</button></a></p>
+						<p><a href="Personal_information_change.jsp"><button>修改个人信息</button></a></p>
 					</div>
 						
 					</div>

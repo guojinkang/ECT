@@ -24,23 +24,24 @@
 		<link type="text/css" rel="stylesheet" href="admin/css/core.css">
 		<link type="text/css" rel="stylesheet" href="admin/css/icon.css">
 		<link type="text/css" rel="stylesheet" href="admin/css/home.css">
-		
+		<style>
+			.b{padding:0px;border:1px solid:#ccc;border-radius:25px;}
+		</style>
 	</head>
 
 	<body>
-		
-		
+		<%@include file="head.jsp" %>
 
 		<div class="header">
 			<div class="user-info">
 				<div class="w1200">
 					<div class="user-headface">
-						<img src="statics/images/user_face.jpg"/>
+						<img src="${user.icon }"/>
 					</div>
 					<div class="user-account">
-						<p class="tip">Hi!下午好!</p>
+						<p class="tip">Hi!</p>
 						<p class="account">
-							<span>帐户名：汪世昭</span>
+							<span>欢迎来到我的主页！</span>
 						</p>
 					</div>
 				</div>
@@ -57,7 +58,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="#">
+						<a href="userpublishs?publishname=${user.userName }">
 							<i class="icon iconfont icon-jilu"></i>
 							发布记录
 						</a>
@@ -82,37 +83,14 @@
 				</div>
 				<div class="container">
 				
-						<div class="ydc-panes">
+								
+								<div class="ydc-group-altogether">共<span>${count }</span>条内容</div>
 								<div class="ydc-pane" style="display:block;">
-									<div class="clearfix">
-										<div class="fl ydc-group-sel">
-											<select>
-												<option>全部类型</option>
-												<option>求人</option>
-												<option>求物</option>
-											</select>
-										</div>
-										<div class="fl ydc-group-sel">
-											<select>
-												<option>全部状态</option>
-												<option>未通过</option>
-												<option>已发布</option>
-												<option>已完成</option>
-											</select>
-										</div>
-										<div class="fl ydc-group-input">
-											<input type="text" placeholder="请输入关键词进行搜索">
-											<button class="ydc-group-button">搜 索</button>
-										</div>
-									</div>
-								<div class="ydc-group-altogether">共<span>9</span>条内容</div>
+									<c:forEach var="p" items="${page.list}"> 
 									<div class="ydc-group-table">
-
-
-
 										<div class="ydc-group-table-item">
 											<div class="ydc-group-table-item-img">
-												<img src="images/gallery-3.gif" alt="">
+												<img src="${p.pricture}" width="133px" height="95px">
 											</div>
 											<div class="ydc-actions">
 												<div>
@@ -121,45 +99,37 @@
 											</div>
 											<div class="ydc-group-table-item-text">
 												<span>
-													<a href="#">惊！河北师范大学软件学院抓到一只吃汉堡的海星</a>
+													<a href="#">${p.title}</a>
 												</span>
-												
 											</div>
 											<div class="ydc-group-table-item-info">
-												<b style="color:#FF7F00;font-size:24px">价格：168￥</b>
-												<span>发布时间：2018-05-15</span>
+												<b style="color:#FF7F00;font-size:24px">价格：${p.price} ￥</b>
+												<span>发布时间：${p.time}</span>
 											</div>
 										</div>
-										
-										
-
-
 									</div>
-
-
+								    </c:forEach>
 								</div>
-
-
 
 								<div class="ydc-pagination">
 									<ol>
 										<li class="ydc-previous-item">
-											<button class="ydc-previous-item-btn-medium ydc-disabled">
-												<span>上一页</span>
+											<button class="ydc-previous-item-btn-medium">
+												<span><a href="userpublishsbypage?pagenum=${page-1 }">上一页</a></span>
 											</button>
 										</li>
 										<li>
-											<button class="ydc-previous-item-btn-medium cur">1</button>
+											<button class="ydc-previous-item-btn-medium"><a href="userpublishsbypage?pagenum=1">1</a></button>
 										</li>
 										<li>
-											<button class="ydc-previous-item-btn-medium">2</button>
+											<button class="ydc-previous-item-btn-medium"><a href="userpublishsbypage?pagenum=2">2</a></button>
 										</li>
 										<li>
-											<button class="ydc-previous-item-btn-medium">3</button>
+											<button class="ydc-previous-item-btn-medium"><a href="userpublishsbypage?pagenum=3">3</a></button>
 										</li>
 										<li class="ydc-previous-item">
 											<button class="ydc-previous-item-btn-medium">
-												<span>下一页</span>
+												<span><a href="userpublishsbypage?pagenum=${page+1 }">下一页</a></span>
 											</button>
 										</li>
 										<li class="ydc-item-quick">
@@ -169,17 +139,8 @@
 											</button>
 										</li>
 									</ol>
-								</div>
-								
-								</div>
-							
-						</div>
-						
-						
-					</div>
-				</div>
+								</div>		
+				</div>			
 			</div>
-		</div>
 	</body>
-
 </html>

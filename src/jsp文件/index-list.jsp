@@ -16,8 +16,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE;chrome=1">
 	<meta name="format-detection" content="telephone=no">
-	<meta name="keywords" content="一点车 -  让您多懂一点车,一点车，让您多懂一点车的常识，在这里，您会看到汽车相关的知识，汽车日常保养，汽车多用小知识，汽车简单维修以及清洗保养等等。">
-	<meta name="description" content="一点车 -  让您多懂一点车,一点车，让您多懂一点车的常识，在这里，您会看到汽车相关的知识，汽车日常保养，汽车多用小知识，汽车简单维修以及清洗保养等等。。">
+	
 	<meta name="author" content="AUI, a-ui.com">
 	<meta name="baidu-site-verification" content="ZVPGgtpUfW"/>
 	<title>海星网</title>
@@ -70,13 +69,16 @@ function sw()
 					<div class="ydc-menu">
 						<ul>
 							<li class="ydc-menu-item">
-								<a href="release.jsp"><i class="ydc-icon ydc-icon-find fl"></i>发布</a>
+								<a href="release"><i class="ydc-icon ydc-icon-find fl"></i>发布</a>
 							</li>
 							<li class="ydc-menu-item">
 								<span class="ydc-menu-sub-title">
 									<i class="ydc-icon ydc-icon-file fl"></i>分类
 								</span>
 								<ul>
+									<li>
+										<a href="indexlist?pageNum=1&search=&type=">查看全部</a>
+									</li>
 									<li>
 										<a href="Searchtype?searchtype=1">跑腿代购</a>
 									</li>
@@ -97,16 +99,7 @@ function sw()
 									</li>
 								</ul>
 							</li>
-							<li class="ydc-menu-item">
-								<span class="ydc-menu-sub-title">
-									<i class="ydc-icon ydc-icon-set fl"></i>设置
-								</span>
-								<ul>
-									<li>
-										<a href="info">账号信息</a>
-									</li>
-								</ul>
-							</li>
+							
 							<li class="ydc-menu-item">
 								<span class="ydc-menu-sub-title">
 									<i class="ydc-icon ydc-icon-customer fl"></i>客服
@@ -152,7 +145,7 @@ function sw()
 										</a>
 									</dl>
 								</div>
-								<button class="btn ydc-ne-carousel" onclick="javascript:window.location.href='release.html';">
+								<button class="btn ydc-ne-carousel" onclick="javascript:window.location.href='release';">
 									<i class="ydc-icon-shu"></i>
 									<span>发布</span>
 								</button>
@@ -202,7 +195,7 @@ function sw()
 											</div>
 											<div class="ydc-group-table-item-text">
 												<span>
-													<a href="onepublish?publishname=${p.publishId }">${p.title}</a>
+													<a href="onepublish?publishid=${p.publishId }">${p.title}</a>
 												</span>
 												<span class="ydc-group-table-item-tag"><a href="#">私聊</a></span>
 											</div>

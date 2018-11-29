@@ -4,7 +4,7 @@
 <!DOCTYPE HTML>
 <html>
 	<frameset rows="10%,90%" border="0">
-		<frame name="main" scrolling="no" noresize src="head.jsp">
+		<frame name="main"  noresize src="head.jsp">
 		<frame target="main" src="bt/bt.jsp">
 	</frameset>
 	<noframes>

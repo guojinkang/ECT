@@ -54,49 +54,71 @@
 	        
 	     }
 	}
+	function submit1(){
+		
+		var name = document.getElementById("userName");
+		var password = document.getElementById("passWord");
+		var password2 = document.getElementById("twopassWord");
+		if(name.value==''){
+			alert('用户名不能为空！');
+			
+			return false;
+			}
+			if(password.value==''){
+			alert('密码不能为空！');
+			
+			return false;
+			}
+			if(password.value.length<2)
+				{
+				alert('密码最短长度为2个字符');
+				return false;
+				}
+			if(password2.value==''||password.value!=password2.value)
+				{
+				
+				 document.getElementById("tishi").innerHTML="<font color='red'>两次密码不相同</font>";
+				 return false;
+				}
+			return true;
+	}
+	function checkName()
+	{
+		var name=document.getElementById("userName").value;
+		var xmlhttp;
+		if (window.XMLHttpRequest){
+		    xmlhttp=new XMLHttpRequest();
+		}
+		else{
+		    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		xmlhttp.open("POST","checkname?name="+name,true);
+		xmlhttp.send();
+		xmlhttp.onreadystatechange=function(){
+		    if (xmlhttp.readyState==4 && xmlhttp.status==200){
+		        var res=xmlhttp.responseText;
+		        
+		        if(res==1){
+		        	document.getElementById("msg").innerHTML="用户名可用";
+		        }
+		        else{
+		        	if(res==12)
+		      			{
+		        		document.getElementById("msg").innerHTML="用户名过短";
+		      			}
+		        	else	
+		        		document.getElementById("msg").innerHTML="该用户名已注册";
+		        }
+		    }
+		}
+	}
 	</script>
 	
 </head>
 <body>
 
 <!-- head YDC begin -->
-	<nav class="colorlib-nav" role="navigation">
-			<div class="top-menu" style="background:#f5fff5;">
-				<div class="container">
-					<div class="row">
-						<div class="col-xs-2">
-							<div id="colorlib-logo"><img src="images/logo.jpg">&nbsp;<a href="index.jsp">海星</a></div>
-						</div>
-						<div class="col-xs-10 text-right menu-1">
-							<ul>
-								<li class="active"><a href="index.jsp">首页</a></li>
-
-								<li class="has-dropdown">
-									<a href="index-list.jsp">问题列表</a>
-								</li>
-
-								<li class="has-dropdown">
-									<a href="blog.jsp">客服服务</a>
-								</li>
-								<li class="active">
-									<c:choose>
-										<c:when test="${empty username }">
-												<a href='login.jsp'>请登陆</a>
-										</c:when>
-										<c:otherwise>
-											<img class='b' src="${username.icon}" width='30'  height='30'>&nbsp; ${username.userName} &nbsp;<a href='loginout'>退出登录</a>
-										</c:otherwise>
-									</c:choose>
-							
-								</li>
-
-
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</nav>
+	<%@include file="head.jsp" %>
 <!-- head YDC end -->
 
 <!-- content YDC begin -->
@@ -113,26 +135,27 @@
 				<div class="ydc-reg-form clearfix">
 				
 				
-					<form action="regist" method="post" enctype="multipart/form-data">
+					<form action="regist" method="post" onsubmit="return submit1();">
 					
 						<div class="ydc-reg-form-class ydc-reg-form-reg">
 							<div class="ydc-reg-form-group clearfix">
 								<label>帐号名称:</label>
 								<div class="ydc-reg-form-input">
-									<input type="text" id="userName" name="userName" class="ydc-form-control" autocomplete="off" placeholder="请输入2至14字的帐号名称" style="width:200px;">
+									<input maxlength="14" type="text" id="userName" name="userName" class="ydc-form-control" autocomplete="off" placeholder="请输入2至14字的帐号名称" style="width:200px;" onBlur="checkName()">
+									<div id="msg"></div>
 								</div>
 							</div>
 							<div class="ydc-reg-form-group clearfix">
 								<label>帐号密码:</label>
 								<div class="ydc-reg-form-input">
-									<input type="password" id="passWord" name="passWord" class="ydc-form-control" autocomplete="off" placeholder="请输入2至14字的字符">
+									<input maxlength="14" type="password" id="passWord" name="passWord" class="ydc-form-control" autocomplete="off" placeholder="请输入2至14字的字符">
 									
 								</div>
 							</div>
 							<div class="ydc-reg-form-group clearfix">
 								<label>确认密码:</label>
 								<div class="ydc-reg-form-input">
-									<input type="password" id="twopassWord" name="" class="ydc-form-control" autocomplete="off" placeholder="请输入一致的密码" onkeyup="validate()">
+									<input maxlength="14" type="password" id="twopassWord" name="" class="ydc-form-control" autocomplete="off" placeholder="请输入一致的密码" onkeyup="validate()">
                         		    <span id="tishi"></span>
 								</div>
 							</div>

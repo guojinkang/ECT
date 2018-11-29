@@ -24,22 +24,24 @@
 		<link type="text/css" rel="stylesheet" href="admin/css/core.css">
 		<link type="text/css" rel="stylesheet" href="admin/css/icon.css">
 		<link type="text/css" rel="stylesheet" href="admin/css/home.css">
-		
+		<style>
+			.b{padding:0px;border:1px solid:#ccc;border-radius:25px;}
+		</style>
 	</head>
 
 	<body>
-		
+		<%@include file="head.jsp" %>
 
 		<div class="header">
 			<div class="user-info">
 				<div class="w1200">
 					<div class="user-headface">
-						<img src="statics/images/user_face.jpg"/>
+						<img src="${user.icon }"/>
 					</div>
 					<div class="user-account">
-						<p class="tip">Hi!下午好!</p>
+						<p class="tip">Hi!</p>
 						<p class="account">
-							<span>帐户名：汪世昭</span>
+							<span>欢迎来到我的主页！</span>
 						</p>
 					</div>
 				</div>
@@ -56,7 +58,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="user-fb.jsp">
+						<a href="userpublishs?publishname=${user.userName }">
 							<i class="icon iconfont icon-jilu"></i>
 							发布记录
 						</a>

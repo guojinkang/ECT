@@ -23,4 +23,8 @@ public class UsersDaoImpl extends BaseDao<User>{
 		return u;
 	}
 	
+	public void updateUser(User user)
+	{
+		update(user);
+	}
 }

@@ -24,49 +24,16 @@
 		<link type="text/css" rel="stylesheet" href="admin/css/core.css">
 		<link type="text/css" rel="stylesheet" href="admin/css/icon.css">
 		<link type="text/css" rel="stylesheet" href="admin/css/home.css">
+		<link rel="stylesheet" href="css/x0popup.min.css">
 		<style>
+			.ri{width:100px; height:60px;float:right} 
 			.b{padding:0px;border:1px solid:#ccc;border-radius:25px;}
 		</style>
+		
 	</head>
 
 	<body>
-		<nav class="colorlib-nav" role="navigation">
-			<div class="top-menu" style="background:#f5fff5;">
-				<div class="container">
-					<div class="row">
-						<div class="col-xs-2">
-							<div id="colorlib-logo"><img src="images/logo.jpg">&nbsp;<a href="index.jsp">海星</a></div>
-						</div>
-						<div class="col-xs-10 text-right menu-1">
-							<ul>
-								<li class="active"><a href="index.jsp" target="_top">首页</a></li>
-
-								<li class="has-dropdown">
-									<a href="indexlist" target="_top">问题列表</a>
-								</li>
-
-								<li class="has-dropdown">
-									<a href="blog.jsp" target="_top">客服服务</a>
-								</li>
-								<li class="active">
-									<c:choose>
-										<c:when test="${empty username }">
-												<a href='login.jsp' target="_top">请登陆</a>
-										</c:when>
-										<c:otherwise>
-											<a href="Personal_information.jsp"><img class='b' src="${username.icon}" width='30'  height='30'></a>&nbsp; ${username.userName} &nbsp;<a href='loginout' target="_top">退出登录</a>
-										</c:otherwise>
-									</c:choose>
-							
-								</li>
-
-
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</nav>
+		<%@include file="head.jsp" %>
 
 		<div class="header">
 			<div class="user-info">
@@ -94,15 +61,33 @@
 						</a>
 					</li>
 					<li>
-						<a href="userpublishss?publishnamee=${username.userName }">
+						<a href="histroy_order?username=${username.userName }&pagenum=1">
 							<i class="icon iconfont icon-jilu"></i>
-							发布记录
+							历史接单
 						</a>
 					</li>
 					<li>
-						<a href="Personal_information_wc.jsp">
+						<a href="histroy_order?username=${username.userName }&pagenum=1">
 							<i class="icon iconfont icon-icon--"></i>
-							完成记录
+							历史发布
+						</a>
+					</li>
+					<li>
+						<a href="histroy_order?username=${username.userName }&pagenum=1">
+							<i class="icon iconfont icon-jilu"></i>
+							正在发布
+						</a>
+					</li>
+					<li>
+						<a href="histroy_order?username=${username.userName }&pagenum=1">
+							<i class="icon iconfont icon-icon--"></i>
+							正在完成
+						</a>
+					</li>
+					<li>
+						<a href="Personal_password_change.jsp">
+							<i class="icon iconfont icon-icon--"></i>
+							修改密码
 						</a>
 					</li>
 				</ul>
@@ -114,13 +99,14 @@
 				<div class="container">
 				
 								
-								<div class="ydc-group-altogether">共<span>9</span>条内容</div>
+								<div class="ydc-group-altogether">共<span>${count }</span>条内容</div>
+								
 								<div class="ydc-pane" style="display:block;">
-									<c:forEach var="p" items="${userpublish}">
+									<c:forEach var="p" items="${page.list}">
 									<div class="ydc-group-table">
 										<div class="ydc-group-table-item">
 											<div class="ydc-group-table-item-img">
-												<img src="${p.pricture}" width="133px" height="95px">
+												<img src="bt/${p.pricture }" width="133px" height="95px">
 											</div>
 											<div class="ydc-actions">
 												<div>
@@ -129,48 +115,84 @@
 											</div>
 											<div class="ydc-group-table-item-text">
 												<span>
-													<a href="#">${p.title}</a>
+													<a href="onepublish?publishname=${p.publishId }">${p.title}</a>
 												</span>
+												<div class="ri"><input type="button" value="确认完成"></div>
+												<div class="ri"><button id="${p.publishId }" onclick="exec(2,this.id)">删除任务</button></div>
 											</div>
+											
+											
+											
 											<div class="ydc-group-table-item-info">
 												<b style="color:#FF7F00;font-size:24px">价格：${p.price} ￥</b>
 												<span>发布时间：${p.time}</span>
-											</div>
+											</div>	
 										</div>
+									
+										
 									</div>
 								    </c:forEach>
 								</div>
-
-								<div class="ydc-pagination">
+							<div class="ydc-pagination">
 									<ol>
 										<li class="ydc-previous-item">
-											<button class="ydc-previous-item-btn-medium">
-												<span><a href="userpublishsbypage?pagenum=${page-1 }">上一页</a></span>
+											<a href="histroy_order?pagenum=${page.prePageNum}"><button class="ydc-previous-item-btn-medium">
+												<span>上一页</span>
 											</button>
+											</a>
 										</li>
+										<c:forEach var="i"  begin="1" end="${page.totalPageNum}">
 										<li>
-											<button class="ydc-previous-item-btn-medium"><a href="userpublishsbypage?pagenum=1">1</a></button>
+											<c:choose>
+											<c:when test="${i==page.currentPageNum}">
+											<a href="histroy_order?pagenum=${i}"><button class="ydc-previous-item-btn-medium cur">${i}</button></a>
+											</c:when>
+											<c:otherwise>
+											<a href="histroy_order?pagenum=${i}"><button class="ydc-previous-item-btn-medium">${i}</button></a>
+											</c:otherwise>
+											</c:choose>
 										</li>
-										<li>
-											<button class="ydc-previous-item-btn-medium"><a href="userpublishsbypage?pagenum=2">2</a></button>
-										</li>
-										<li>
-											<button class="ydc-previous-item-btn-medium"><a href="userpublishsbypage?pagenum=3">3</a></button>
-										</li>
+										</c:forEach>
 										<li class="ydc-previous-item">
-											<button class="ydc-previous-item-btn-medium">
-												<span><a href="userpublishsbypage?pagenum=${page+1 }">下一页</a></span>
+											<a href="histroy_order?pagenum=${page.nextPageNum}"><button class="ydc-previous-item-btn-medium">
+												<span>下一页</span>
 											</button>
+											</a>
 										</li>
 										<li class="ydc-item-quick">
-											第<div class="ydc-item-quick-kun"><input type="number" aria-invalid="false" class=""></div>页
-											<button style="margin-left:5px;" class="ydc-previous-item-btn-medium">
+											第<div class="ydc-item-quick-kun"><input type="text" aria-invalid="false" class="" 
+											style="height: 20px;" id="switch"></div>页
+											<button style="margin-left:5px;" class="ydc-previous-item-btn-medium" onclick="sw()">
 												<span>跳转</span>
 											</button>
 										</li>
 									</ol>
-								</div>		
+								</div>
+							
 				</div>			
 			</div>
+		
+<script src="js/x0popup.min.js"></script>
+<script type="text/javascript">
+	function exec(number,id) {
+		
+		z= id;
+		
+		x0p('警告', '你确认要删除这条任务吗', 'warning',z);
+	}
+	
+	function sw()
+	{
+		var sw=document.getElementById("switch").value;
+		if(sw!=""){
+			
+		
+			window.location.href="/ECTPrj/histroy_order?pagenum="+sw;
+		}
+	}
+</script>
+
+
+
 	</body>
 </html>

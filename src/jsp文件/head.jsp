@@ -59,7 +59,11 @@
 								<li class="has-dropdown">
 									<a href="indexlist?pageNum=1&search=&type=" target="_top">问题列表</a>
 								</li>
-
+								
+								<li class="has-dropdown">
+									<a href="topay" target="_top">海星充值</a>
+								</li>
+								
 								<li class="has-dropdown">
 									<a href="index.jsp" target="_top">客服服务</a>
 								</li>

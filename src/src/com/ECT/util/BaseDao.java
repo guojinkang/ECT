@@ -18,7 +18,7 @@ public class BaseDao<T> {
 	@Resource
     private SessionFactory sessionFactory;
 
-    private Session getSession(){
+    public Session getSession(){
         return sessionFactory.getCurrentSession();
     }
     
