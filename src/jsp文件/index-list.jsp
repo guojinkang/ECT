@@ -98,16 +98,7 @@ function f(){
 									</li>
 								</ul>
 							</li>
-							<li class="ydc-menu-item">
-								<span class="ydc-menu-sub-title">
-									<i class="ydc-icon ydc-icon-set fl"></i>设置
-								</span>
-								<ul>
-									<li>
-										<a href="info.jsp">账号信息</a>
-									</li>
-								</ul>
-							</li>
+						
 							<li class="ydc-menu-item">
 								<span class="ydc-menu-sub-title">
 									<i class="ydc-icon ydc-icon-customer fl"></i>客服
@@ -153,7 +144,7 @@ function f(){
 										</a>
 									</dl>
 								</div>
-								<button class="btn ydc-ne-carousel" onclick="javascript:window.location.href='release.html';">
+								<button class="btn ydc-ne-carousel" onclick="javascript:window.location.href='release.jsp';">
 									<i class="ydc-icon-shu"></i>
 									<span>发布</span>
 								</button>
