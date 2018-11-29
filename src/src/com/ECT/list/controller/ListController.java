@@ -40,7 +40,7 @@ public class ListController {
 		String type = request.getParameter("type");
 		Select sel = new Select();
 		//type和search都没有值的情况
-		if(search.equals("")&type.equals("")) {
+		if(search.equals("")&&type.equals("")) {
 			int a=listService.totalCount();
 			request.setAttribute("count", a);
 			count=listService.showPageNum(a);          //把页码存入count
@@ -54,7 +54,7 @@ public class ListController {
 			page.setList(listService.dividePage(num, 10));
 		}
 		//type有值的情况
-		if(search.equals("")&type.length()>0) {
+		if(search.equals("")&&type.length()>0) {
 			if(type.equals("求人")) {
 				sel.setOne("selected");
 				sel.setTwo("");
@@ -77,7 +77,7 @@ public class ListController {
 			page.setList(listService.typeDividePage(num, 10, type));
 		}
 		//search有值的情况
-		if(type.equals("")&search.length()>0) {
+		if(type.equals("")&&search.length()>0) {
 			int a = listService.nameCount(search);
 			request.setAttribute("count", a);
 			count=listService.showPageNum(a);
@@ -91,7 +91,7 @@ public class ListController {
 			page.setList(listService.nameDividePage(num, 10, search));
 		}
 		//type和search都有值的情况
-		if(search.length()>0&type.length()>0) {
+		if(search.length()>0&&type.length()>0) {
 			if(type.equals("求人")) {
 				sel.setOne("selected");
 				sel.setTwo("");
