@@ -5,10 +5,17 @@ import java.util.List;
 public class Page<T> {
 	
 	private List<T> list;
+<<<<<<< HEAD
 	private int currentPageNum;     //当前页
 	private int prePageNum;			//前一页
 	private int nextPageNum;		//下一页
 	private int totalPageNum;		//总页数
+=======
+	private int currentPageNum;     //��ǰҳ
+	private int prePageNum;			//ǰһҳ
+	private int nextPageNum;		//��һҳ
+	private int totalPageNum;		//��ҳ��
+>>>>>>> 2c25982761223da2a75b7c77cb528f485b2db5cf
 	
 	
 	public List<T> getList() {
