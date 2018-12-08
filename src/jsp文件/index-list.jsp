@@ -97,9 +97,18 @@ function sw()
 									<li>
 										<a href="Searchtype?searchtype=6">打工兼职</a>
 									</li>
+<<<<<<< HEAD
 								</ul>
 							</li>
 							
+=======
+									<li>
+										<a href="Searchtype?searchtype=7">物品买卖</a>
+									</li>
+								</ul>
+							</li>
+						
+>>>>>>> 5de9cec2ba42240f196766991e01d76ac1928a8b
 							<li class="ydc-menu-item">
 								<span class="ydc-menu-sub-title">
 									<i class="ydc-icon ydc-icon-customer fl"></i>客服
@@ -145,7 +154,11 @@ function sw()
 										</a>
 									</dl>
 								</div>
+<<<<<<< HEAD
 								<button class="btn ydc-ne-carousel" onclick="javascript:window.location.href='release';">
+=======
+								<button class="btn ydc-ne-carousel" onclick="javascript:window.location.href='release.jsp';">
+>>>>>>> 5de9cec2ba42240f196766991e01d76ac1928a8b
 									<i class="ydc-icon-shu"></i>
 									<span>发布</span>
 								</button>
